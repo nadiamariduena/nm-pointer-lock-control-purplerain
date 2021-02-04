@@ -1335,3 +1335,11 @@ startAnimationLoop = () => {
 - Its certainly moving towards the direction I want but i cant use the keys
 
 [<img src="./src/images/control_moving.gif"/>]()
+
+<br>
+<br>
+<br>
+
+#### Since controls are funny to play with, I will give it another try later
+
+[<img src="./src/images/panama-vanhalen.gif"/>]()
