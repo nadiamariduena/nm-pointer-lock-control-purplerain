@@ -1340,6 +1340,10 @@ startAnimationLoop = () => {
 <br>
 <br>
 
+# 🌈🌈🌈
+
 #### Since controls are funny to play with, I will give it another try later
 
 [<img src="./src/images/panama-vanhalen.gif"/>](https://youtu.be/fuKDBPw8wQA)
+
+ 
