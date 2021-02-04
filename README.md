@@ -1,21 +1,50 @@
-<br>
-<br>
-<br>
+# 🦄🦄🦄
 
-# 🦄
+<br>
+<br>
+<br>
 
 # PointerLockControls
 
+- **PointerLockControls** is different since it uses the Pointer Lock API. That means the mouse is captured (the cursor is hidden during the capturing) and only mouse movements (so the actual delta values) transform the camera when looking around. This is the behavior you usually know from First-Person games.
+
+<br>
+
+##### Click on the image:
+
+[<img src="./src/images/Bruno-simon-portfolio.jpg"/>](https://bruno-simon.com/)
+
+> This amazing portfolio, is the kind of things you can do with Pointer Lock Controls.
+
+<br>
+
+# 👾👾👾 FIRST TEST 👾👾👾
+
+### The Other day while looking for a solution for a "draco converter" issue, i fell upon this example, from the moment i saw it i feel like i should give it a try.
+
+ <br>
+
 [FirstPerson controls horizontal constraint](https://discourse.threejs.org/t/firstperson-controls-horizontal-constraint/17739)
 
-- I FOUND this example while i was looking for solutions related to the DRACO converter, what i like is the possibility of jump into the objects :) 🏃
+<br>
+
+- SO I STARTED to read the code and then I started to converted it to react.
 
 <br>
+
+- Most of it works, but of course there were some issues since i am still new with **REACT** itself.
+
 <br>
+
+[<img src="./src/images/potatoes.gif"/>]()
+
+<br>
+
+#### SO IF YOU ARE ALREADY GOOD in React you can skip this part as its related to doubts about how to add an event.
 
 ###### (update) it worked!
 
-##### I TRIED TO ADD THE BLOCKER but it didnt work because I am trying to add an event listener to threejs "the scene" , it would have been easy to just have some div to make the connection to but for now i prefer to pass
+> I TRIED TO ADD THE BLOCKER but it didnt work because I am trying to add an event listener to threejs "the scene" , it would have been easy to just have some div to make the connection to but for now i prefer to pass
 
 - So this is the code that didnt work, it serves to add the overlay of the scene, where you explain the commands before playing
 
@@ -85,9 +114,6 @@ this.scene.add(this.controls.getObject());
 // https: ; //linguinecode.com/post/react-onclick-event-vs-js-addeventlistener
 ```
 
-<br>
-<br>
-
 #### EXAMPLE of what i had in mind , but we cannot do it in this one
 
 - I used this approach for the dropdown menu
@@ -107,17 +133,23 @@ class App extends React.Component {
 <br>
 <br>
 
-# 🦕
+# 👾👾👾👾
 
-#### LETS CONTINUE ... I will check it later
+## LETS CONTINUE BUT BEFORE ...
 
-- LETS CONTINUE with the game commands (to see if it works)
+### What is RAYCAST?
+
+[<img src="./src/images/tenor.gif"/>](https://youtu.be/1IyH6NjaxFo)
+
+- In a shooter game like counter strike, **when you shoot**, the **bullet** is no a gameObject travelling fast, but **is a "Ray" from the gun to N distance**. And every player in this ray get damaged.
+
+> See the example above ( Jiban shooting some villain )
+> [What is Raycast?](https://forum.unity.com/threads/what-is-raycast.400698/)
 
 <br>
+<br>
 
-- I DECIDED to try this code just because of the jump :)
-
-[<img src="./src/images/jump-vanhalen.gif"/>](https://youtu.be/5EqWN4fT79s)
+## LETS CONTINUE with the game commands (to see if it works)
 
 <br>
 
@@ -178,6 +210,8 @@ const onKeyUp = function (event) {
   }
 };
 ```
+
+[<img src="./src/images/jump-vanhalen.gif"/>](https://youtu.be/5EqWN4fT79s)
 
 #### UNTIL NOW _no_ ERRORS just a WARNING
 
