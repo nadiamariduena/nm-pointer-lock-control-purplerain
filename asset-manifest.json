@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/nm-pointer-lock-control-purplerain/static/css/main.bc7f6b2e.chunk.css",
+    "main.js": "/nm-pointer-lock-control-purplerain/static/js/main.4274c785.chunk.js",
+    "main.js.map": "/nm-pointer-lock-control-purplerain/static/js/main.4274c785.chunk.js.map",
+    "runtime-main.js": "/nm-pointer-lock-control-purplerain/static/js/runtime-main.bb574179.js",
+    "runtime-main.js.map": "/nm-pointer-lock-control-purplerain/static/js/runtime-main.bb574179.js.map",
+    "static/js/2.88260218.chunk.js": "/nm-pointer-lock-control-purplerain/static/js/2.88260218.chunk.js",
+    "static/js/2.88260218.chunk.js.map": "/nm-pointer-lock-control-purplerain/static/js/2.88260218.chunk.js.map",
+    "static/js/3.08ba0d44.chunk.js": "/nm-pointer-lock-control-purplerain/static/js/3.08ba0d44.chunk.js",
+    "static/js/3.08ba0d44.chunk.js.map": "/nm-pointer-lock-control-purplerain/static/js/3.08ba0d44.chunk.js.map",
+    "index.html": "/nm-pointer-lock-control-purplerain/index.html",
+    "static/css/main.bc7f6b2e.chunk.css.map": "/nm-pointer-lock-control-purplerain/static/css/main.bc7f6b2e.chunk.css.map",
+    "static/js/2.88260218.chunk.js.LICENSE.txt": "/nm-pointer-lock-control-purplerain/static/js/2.88260218.chunk.js.LICENSE.txt",
+    "static/media/main.scss": "/nm-pointer-lock-control-purplerain/static/media/Ubuntu-Regular.fbdecfce.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bb574179.js",
+    "static/js/2.88260218.chunk.js",
+    "static/css/main.bc7f6b2e.chunk.css",
+    "static/js/main.4274c785.chunk.js"
+  ]
+}
