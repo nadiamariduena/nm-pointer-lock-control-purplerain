@@ -40,11 +40,13 @@
 
 <br>
 
-#### SO IF YOU ARE ALREADY GOOD in React you can skip this part as its related to doubts about how to add an event.
+#### SO IF YOU ARE ALREADY proficient in React, you can skip this part as its related to _doubts_ about "how to add an event".
 
 ###### (update) it worked!
 
-> I TRIED TO ADD THE BLOCKER but it didnt work because I am trying to add an event listener to threejs "the scene" , it would have been easy to just have some div to make the connection to but for now i prefer to pass
+#### (I was really tired when adding this, but i will keep it as ref)
+
+> I TRIED TO ADD THE "BLOCKER" but it didn't work because I am trying to add an event listener to threejs "the scene" , it would have been easy to just have some div to make the connection to but for now i prefer to pass
 
 - So this is the code that didnt work, it serves to add the overlay of the scene, where you explain the commands before playing
 
