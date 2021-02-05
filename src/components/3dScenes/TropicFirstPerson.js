@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import * as THREE from "three";
-import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
+import React, { Component } from 'react';
+import * as THREE from 'three';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 //
 //
 const style = {
@@ -21,12 +21,12 @@ class TropicalVoid extends Component {
     this.addCustomSceneObjects();
     this.startAnimationLoop();
     //
-    window.addEventListener("resize", this.handleWindowResize);
+    window.addEventListener('resize', this.handleWindowResize);
   }
   //
   //
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowResize);
+    window.removeEventListener('resize', this.handleWindowResize);
     window.cancelAnimationFrame(this.requestID);
     // right now with the first person control,
     // we dont need this dispose as it s already included inside the three folder, check the read me, in the
@@ -119,7 +119,7 @@ class TropicalVoid extends Component {
     // this.eleModelBlOne.addEventListener("click", () => {
     //   this.controls.lock();
     // });
-    this.eleModelBlOne.addEventListener("click", () => {
+    this.eleModelBlOne.addEventListener('click', () => {
       this.controls.lock();
       // it gives you access to raw mouse movement.LOCKS
       // the target of the mouse events to a single element ,
@@ -128,17 +128,17 @@ class TropicalVoid extends Component {
       // ***
       // So when you are actually moving the mouse across the screen (without displacing,)
       // the pointer has been LOCK to the canvas
-      console.log("I clicked");
+      console.log('I clicked');
     });
     //
 
-    this.controls.addEventListener("lock", () => {
-      this.eleModelBlOne.style.display = "none";
+    this.controls.addEventListener('lock', () => {
+      this.eleModelBlOne.style.display = 'none';
     });
     //
 
-    this.controls.addEventListener("unlock", () => {
-      this.eleModelBlOne.style.display = "block";
+    this.controls.addEventListener('unlock', () => {
+      this.eleModelBlOne.style.display = 'block';
     });
     // //
 
@@ -152,7 +152,9 @@ class TropicalVoid extends Component {
     //
     //
     this.scene.add(this.controls.getObject());
-    var onKeyDown = function (event) {
+
+    //I MADE THESE ARROW FUNCTIONS AND THEY CAN USE this. now
+    var onKeyDown = (event) => {
       switch (event.keyCode) {
         case 38: // up
         case 87: // w
@@ -176,7 +178,8 @@ class TropicalVoid extends Component {
           break;
       }
     };
-    var onKeyUp = function (event) {
+
+    var onKeyUp = (event) => {
       switch (event.keyCode) {
         case 38: // up
         case 87: // w
@@ -196,8 +199,8 @@ class TropicalVoid extends Component {
           break;
       }
     };
-    document.addEventListener("keydown", onKeyDown, false);
-    document.addEventListener("keyup", onKeyUp, false);
+    document.addEventListener('keydown', onKeyDown, false);
+    document.addEventListener('keyup', onKeyUp, false);
 
     //
     this.raycaster = new THREE.Raycaster(
@@ -259,16 +262,12 @@ class TropicalVoid extends Component {
     // what makes the triangles of the floor have different colors
     for (let i = 0, l = position.count; i < l; i++) {
       // here you are generating random colors HSL
-      this.color.setHSL(
-        Math.random() * 0.3 + 0.5,
-        0.75,
-        Math.random() * 0.25 + 0.75
-      );
+      this.color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
       colorsFloor.push(this.color.r, this.color.g, this.color.b);
     }
     //
     this.floorGeometry.setAttribute(
-      "color",
+      'color',
       new THREE.Float32BufferAttribute(colorsFloor, 3)
     );
     //
@@ -294,16 +293,12 @@ class TropicalVoid extends Component {
     const colorsBox = [];
     //
     for (let i = 0, l = position.count; i < l; i++) {
-      this.color.setHSL(
-        Math.random() * 0.3 + 0.5,
-        0.75,
-        Math.random() * 0.25 + 0.75
-      );
+      this.color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
       colorsBox.push(this.color.r, this.color.g, this.color.b);
     }
     //
     this.boxGeometry.setAttribute(
-      "color",
+      'color',
       new THREE.Float32BufferAttribute(colorsBox, 3)
     );
     //
@@ -424,7 +419,13 @@ class TropicalVoid extends Component {
     this.time = performance.now();
     //// Are the controls enabled? (Does the browser have pointer lock?)
     if (this.controls.isLocked === true) {
-      //
+      // LETS SEE IF IT UPDATES PROPERLY
+      console.log(`FORWARD`, this.moveForward);
+      console.log(`BACKWARDS`, this.moveBackward);
+      console.log(`LEFT`, this.moveLeft);
+      console.log(`RIGHT`, this.moveRight);
+      console.log(`--------------------------------`);
+
       this.raycaster.ray.origin.copy(this.controls.getObject().position);
       // A ray that emits from an origin in a certain direction.
       this.raycaster.ray.origin.y -= 10;
@@ -442,26 +443,39 @@ class TropicalVoid extends Component {
       this.velocity.z -= this.velocity.z * 10.0 * this.delta;
       // As velocity.y is our "gravity," calculate delta
       this.velocity.y -= 9.8 * 100.0 * this.delta; // 100.0 = mass
+
+      // WE WERE MISSING THESE GUYS FROM THE EXAMPLE
+      this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
+      this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
+      this.direction.normalize(); // this ensures consistent movements in all directions
+
+      // how to move i guess when you click
+      if (this.moveForward || this.moveBackward)
+        this.velocity.z -= this.direction.z * 400.0 * this.delta;
+      if (this.moveLeft || this.moveRight)
+        this.velocity.x -= this.direction.x * 400.0 * this.delta;
       //
+      // //              *****
+      // //              new
+      // if (this.moveForward) {
+      //   console.log(`I am moving forward`);
+      //   this.velocity.z -= 400.0 * this.delta;
+      // }
 
-      //
-      //              *****
-      //              new
-      if (this.controls.moveForward) {
-        this.velocity.z -= 400.0 * this.delta;
-      }
+      // if (this.moveBackward) {
+      //   console.log(`I am moving backwards`);
+      //   this.velocity.z += 400.0 * this.delta;
+      // }
 
-      if (this.controls.moveBackward) {
-        this.velocity.z += 400.0 * this.delta;
-      }
+      // if (this.moveLeft) {
+      //   console.log(`I am moving left`);
+      //   this.velocity.x -= 400.0 * this.delta;
+      // }
 
-      if (this.controls.moveLeft) {
-        this.velocity.x -= 400.0 * this.delta;
-      }
-
-      if (this.controls.moveRight) {
-        this.velocity.x += 400.0 * this.delta;
-      }
+      // if (this.moveRight) {
+      //   console.log(`I am moving right`);
+      //   this.velocity.x += 400.0 * this.delta;
+      // }
       //
       //              *****
       //
@@ -515,17 +529,17 @@ class TropicalVoid extends Component {
   */
   render() {
     return (
-      <div className="scene-oblivion">
-        <div className="blocker" ref={(ref) => (this.blocker = ref)}>
+      <div className='scene-oblivion'>
+        <div className='blocker' ref={(ref) => (this.blocker = ref)}>
           {/* --------------------- */}
           {/* --------------------- */}
           {/* --------------------- */}
           <div
-            className="modelBleOne"
+            className='modelBleOne'
             style={style}
             ref={(ref) => (this.eleModelBlOne = ref)}
           >
-            <div className="commands">
+            <div className='commands'>
               <span>Click to play</span>
               <br />
               <br />
