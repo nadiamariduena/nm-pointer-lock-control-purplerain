@@ -1,19 +1,13 @@
 import React, { Component } from "react";
+import reactDom from "react-dom";
 import * as THREE from "three";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 //
 //
-const style = {
-  height: 600, // we can control scene size by setting container dimensions
-};
-//
+
 let raycaster;
-// What is RAYCAST?
-// In a shooter game like counter strike, when you shoot,
-// the bullet is no a gameObject travelling fast, but is a
-// "Ray" from the gun to N distance. And every player in this ray get damaged.
-//
-//
+
+// ss
 
 /*
 
@@ -39,7 +33,7 @@ class TropicalVoid extends Component {
     // right now with the first person control,
     // we dont need this dispose as it s already included inside the three folder, check the read me, in the
     // beginning you will find a copy of the code inside the threejs that I am using.
-    this.controls.dispose();
+    // this.controls.dispose();
   }
   /*
 
@@ -51,7 +45,8 @@ class TropicalVoid extends Component {
     //
     // ----------------
     this.objects = [];
-    //----------------
+    // //----------------
+    // //
 
     this.moveForward = false;
     this.moveBackward = false;
@@ -68,17 +63,16 @@ class TropicalVoid extends Component {
     // this.lemonChiffon = "rgb(240, 224, 190)";
     //
     //
-    //
+    // NEW
 
     //
-    //                WIDTH/HEIGHT
-    // --------------------------------------------
     //
-    const width = this.eleModelBlOne.clientWidth;
-    const height = this.eleModelBlOne.clientHeight;
     //
-    // --------------------------------------------
+
+    const width = this.bodytesto.clientWidth;
+    const height = this.bodytesto.clientHeight;
     //
+
     //
     // ---------------
     // Create a camera
@@ -91,157 +85,86 @@ class TropicalVoid extends Component {
     this.camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
-      1,
+      0.1,
       1000
     );
-    this.camera.position.y = 10;
+    this.camera.position.y = 1;
+    this.camera.position.z = 2;
     //
     this.scene = new THREE.Scene();
     // this.scene.background = new THREE.Color(0xffffff);
     //
-    //
-    //
-    // ---------------------------------------
-    //                  RENDERER
-    // ---------------------------------------
-    //
     this.renderer = new THREE.WebGL1Renderer({
-      antialias: true, // will make the edges smooth
       // set the transparency of the scene, otherwise its black
       // alpha: true,
+      // will make the edges smooth
+      antialias: true,
     });
     //
+    //
+    //
+
+    //
+    //renderer.setPixelRatio( window.devicePixelRatio );
     this.renderer.setSize(width, height);
     // BG color from the scene
-    // showMap is connected to the shadows in any object/model
-    this.renderer.shadowMap.enabled = true;
+    // this.renderer.setClearColor(this.lemonChiffon);
+    // this.renderer.shadowMap.enabled = true;
     // here you append it to the jsx
-    this.eleModelBlOne.appendChild(this.renderer.domElement); // mount using React ref
-    // document.appendChild(this.renderer.domElement);  //before
-    //
-    this.blocker.appendChild(this.renderer.domElement);
+    // here below is where the anim will show
+    this.bodytesto.appendChild(this.renderer.domElement);
 
+    this.menuPanel = document.getElementById("menuPanel");
+    this.startButton = document.getElementById("startButton");
+    //
     //
     //
     //---------------------------
     //     PointerLockControl
     //---------------------------
-    // this.controls = new PointerLockControls(this.camera, this.eleModelBlOne);
-    this.controls = new PointerLockControls(this.camera, this.eleModelBlOne);
-    // Create First Person Controls
-    //
-    //
-    this.scene.add(this.controls.getObject());
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+    // this.controls = new PointerLockControls(this.camera, this.bodytesto);
+    // this.controls = new PointerLockControls(this.camera, this.bodytesto);
 
-    this.eleModelBlOne.addEventListener("click", () => {
-      this.controls.lock();
+    this.startButton.addEventListener(
+      "click",
+      () => {
+        this.controls.lock();
+      },
+      false
+    );
 
-      console.log("I clicked");
-    });
+    this.controls = new PointerLockControls(
+      this.camera,
+      this.renderer.domElement
+    );
+    //controls.addEventListener('change', () => console.log("Controls Change"))
+    this.controls.addEventListener(
+      "lock",
+      () => (this.menuPanel.style.display = "none")
+    );
+    this.controls.addEventListener(
+      "unlock",
+      () => (this.menuPanel.style.display = "block")
+    );
     //
-
-    this.controls.addEventListener("lock", () => {
-      this.eleModelBlOne.style.display = "none";
-    });
-    //
-
-    this.controls.addEventListener("unlock", () => {
-      this.eleModelBlOne.style.display = "block";
-      this.eleModelBlOne.style.target = "_blank";
-    });
 
     //
     //
-
-    //-------------------------------
-    //             KEYS
-    //-------------------------------
-    const onKeyDown = (event) => {
-      switch (event.code) {
-        case "ArrowUp":
-        case "KeyW":
-          this.moveForward = true;
-          break;
-
-        case "ArrowLeft":
-        case "KeyA":
-          this.moveLeft = true;
-          break;
-
-        case "ArrowDown":
-        case "KeyS":
-          this.moveBackward = true;
-          break;
-
-        case "ArrowRight":
-        case "KeyD":
-          this.moveRight = true;
-          break;
-
-        case "Space":
-          if (this.canJump === true) this.velocity.y += 350;
-          this.canJump = false;
-          break;
-      }
-    };
-    const onKeyUp = (event) => {
-      switch (event.code) {
-        case "ArrowUp":
-        case "KeyW":
-          this.moveForward = false;
-          break;
-
-        case "ArrowLeft":
-        case "KeyA":
-          this.moveLeft = false;
-          break;
-
-        case "ArrowDown":
-        case "KeyS":
-          this.moveBackward = false;
-          break;
-
-        case "ArrowRight":
-        case "KeyD":
-          this.moveRight = false;
-          break;
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("keyup", onKeyUp);
     //
-    //
-    // What is RAYCAST?
-    // In a shooter game like counter strike, when you shoot,
-    // the bullet is no a gameObject travelling fast, but is a
-    // "Ray" from the gun to N distance. And every player in this ray get damaged.
     raycaster = new THREE.Raycaster(
       new THREE.Vector3(),
       new THREE.Vector3(0, -1, 0),
       0,
       10
     );
-
+    //
+    //
     //
     //
   };
+  //
 
   /*
-
-
-
-
 
 
 
@@ -251,6 +174,7 @@ class TropicalVoid extends Component {
   */
   // 2
   addCustomSceneObjects = () => {
+    //-------------------------------
     //
     //
     // ---------------
@@ -368,7 +292,38 @@ class TropicalVoid extends Component {
     //         BLENDER  MODELS
     //----------------------------------
     //
+    //-------------------------------
+    //             KEYS
+    //-------------------------------
+    //
+    //
 
+    const onKeyDown = function (event) {
+      switch (event.keyCode) {
+        case 87: // w
+          this.controls.moveForward(0.25);
+          break;
+        case 65: // a
+          this.controls.moveRight(-0.25);
+          break;
+        case 83: // s
+          this.controls.moveForward(-0.25);
+          break;
+        case 68: // d
+          this.controls.moveRight(0.25);
+          break;
+      }
+    };
+    this.bodytesto.addEventListener("keydown", onKeyDown, false);
+
+    /*
+    
+    
+    
+    
+    
+    
+    */
     //---------------------
     //   Directional Light
     //---------------------
@@ -404,7 +359,9 @@ class TropicalVoid extends Component {
     //     spotLight FF5733
     //---------------------
     //
-
+    //
+    //
+    //
     // With the light you can see the colors you added to each geometry in the materials
     this.spotLight = new THREE.SpotLight(0xffffff, 0.5); //intensity:   0.5);
     // spotLight.position.set( 0 , 10 , 0 );
@@ -420,9 +377,17 @@ class TropicalVoid extends Component {
     //
     //
   };
-  //
-  //
-  //
+
+  /*
+  
+  
+  
+  
+  
+  
+  
+  
+  */
 
   // 3
   startAnimationLoop = () => {
@@ -454,33 +419,33 @@ class TropicalVoid extends Component {
       //
 
       //
-      this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
-      this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
-      this.direction.normalize(); // this ensures consistent movements in all directions
+      // this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
+      // this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
+      // this.direction.normalize(); // this ensures consistent movements in all directions
 
-      if (this.moveForward || this.moveBackward)
-        this.velocity.z -= this.direction.z * 400.0 * this.delta;
-      if (this.moveLeft || this.moveRight)
-        this.velocity.x -= this.direction.x * 400.0 * this.delta;
-      // ------------------- //
+      // if (this.moveForward || this.moveBackward)
+      //   this.velocity.z -= this.direction.z * 400.0 * this.delta;
+      // if (this.moveLeft || this.moveRight)
+      //   this.velocity.x -= this.direction.x * 400.0 * this.delta;
+      // // ------------------- //
 
       //              *****
       //              new
-      // if (this.controls.moveForward) {
-      //   this.velocity.z -= 400.0 * this.delta;
-      // }
+      if (this.controls.moveForward) {
+        this.velocity.z -= 400.0 * this.delta;
+      }
 
-      // if (this.controls.moveBackward) {
-      //   this.velocity.z += 400.0 * this.delta;
-      // }
+      if (this.controls.moveBackward) {
+        this.velocity.z += 400.0 * this.delta;
+      }
 
-      // if (this.controls.moveLeft) {
-      //   this.velocity.x -= 400.0 * this.delta;
-      // }
+      if (this.controls.moveLeft) {
+        this.velocity.x -= 400.0 * this.delta;
+      }
 
-      // if (this.controls.moveRight) {
-      //   this.velocity.x += 400.0 * this.delta;
-      // }
+      if (this.controls.moveRight) {
+        this.velocity.x += 400.0 * this.delta;
+      }
       // ---------------------------------------
 
       //
@@ -511,8 +476,6 @@ class TropicalVoid extends Component {
     this.prevTime = this.time;
 
     //
-    //
-
     this.renderer.render(this.scene, this.camera);
   };
 
@@ -522,8 +485,8 @@ class TropicalVoid extends Component {
 
   */
   handleWindowResize = () => {
-    const width = this.eleModelBlOne.clientWidth;
-    const height = this.eleModelBlOne.clientHeight;
+    const width = this.bodytesto.clientWidth;
+    const height = this.bodytesto.clientHeight;
     //
     // updated renderer
     this.renderer.setSize(width, height);
@@ -536,35 +499,53 @@ class TropicalVoid extends Component {
 
 
   */
-
   render() {
     return (
-      <div className="scene-oblivion">
-        {/* --------------------- */}
-        <div className="blocker" ref={(ref) => (this.blocker = ref)}>
-          {" "}
-        </div>{" "}
-        {/* --------------------- */}
-        {/* --------------------- */}
-        <div
-          className="modelBleOne"
-          style={style}
-          ref={(ref) => (this.eleModelBlOne = ref)}
-        >
-          <br />
-          <br />
-          Move: WASD
-          <br />
-          Jump: SPACE
-          <br />
-          Look: MOUSE
+      <React.Fragment>
+        <div className="bodytesto" ref={(ref) => (this.bodytesto = ref)}>
+          <div id="menuPanel" ref={(ref) => (this.menuPanel = ref)}>
+            <button id="startButton" ref={(ref) => (this.startButton = ref)}>
+              Click to Start
+            </button>
+          </div>
         </div>
-        {/* --------------------- */}
-        {/* --------------------- */}
-        {/* --------------------- */}
-      </div>
+      </React.Fragment>
     );
   }
 }
 
 export default TropicalVoid;
+
+/*
+
+
+
+.bodytesto {
+  width: 100vw;
+  height: 100vh;
+
+  #menuPanel {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    #startButton {
+      height: 50px;
+      width: 200px;
+      margin: -25px -100px;
+      position: relative;
+      top: 50%;
+      left: 50%;
+      font-size: 32px;
+      //
+      //
+      cursor: pointer;
+    }
+  }
+}
+
+
+
+*/

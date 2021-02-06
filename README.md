@@ -1204,16 +1204,17 @@ startAnimationLoop = () => {
     this.velocity.y -= 9.8 * 100.0 * this.delta; // 100.0 = mass
     //
     //
-    //
+    //------------------
     this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
     this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
     this.direction.normalize(); // this ensures consistent movements in all directions
+   
 
     if (this.moveForward || this.moveBackward)
       this.velocity.z -= this.direction.z * 400.0 * this.delta;
     if (this.moveLeft || this.moveRight)
       this.velocity.x -= this.direction.x * 400.0 * this.delta;
-    //
+    // ------------------- //
     //
     if (this.onObject === true) {
       this.velocity.y = Math.max(0, this.velocity.y);
@@ -1346,4 +1347,6 @@ startAnimationLoop = () => {
 
 [<img src="./src/images/panama-vanhalen.gif"/>](https://youtu.be/fuKDBPw8wQA)
 
+
+ 
  
