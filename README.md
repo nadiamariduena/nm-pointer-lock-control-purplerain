@@ -1352,9 +1352,9 @@ startAnimationLoop = () => {
 
 <br>
 
-##### So I tried this example and I had the same issue, everything worked as usual but there was nothing going on with the KEYS
+#### So I tried the following example and I had the same issue, everything worked as usual but there was nothing going on with the "KEYS"
 
-- So asked my teachers from DCI and UDEMY about this and they said
+- I asked my teachers from DCI and UDEMY about this and they said
 
 ```javascript
 // I think yours doesn't work because you are using this.controls
@@ -1373,7 +1373,6 @@ const onKeyDown = (event) => {
 ```
 
 <br>
-<br>
 
 # 🌈
 
@@ -1391,14 +1390,6 @@ import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonCont
 //
 //
 
-/*
-
-
-
-
-
-
-  */
 class TropicalVoid extends Component {
   componentDidMount() {
     this.sceneSetup();
@@ -1417,11 +1408,7 @@ class TropicalVoid extends Component {
     // beginning you will find a copy of the code inside the threejs that I am using.
     // this.controls.dispose();
   }
-  /*
 
-
-
-  */
   // 1
   sceneSetup = () => {
     this.scene = new THREE.Scene();
@@ -1498,14 +1485,6 @@ class TropicalVoid extends Component {
   };
   //
 
-  /*
-
-
-
-
-
-
-  */
   // 2
   addCustomSceneObjects = () => {
     //
@@ -1550,33 +1529,13 @@ class TropicalVoid extends Component {
     //
   };
 
-  /*
-
-
-
-
-
-
-
-
-  */
-
   // 3
   startAnimationLoop = () => {
     //
     this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
     this.renderer.render(this.scene, this.camera);
   };
-  /*
 
-
-
-
-
-
-
-
-  */
   handleWindowResize = () => {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
@@ -1748,14 +1707,6 @@ let raycaster;
 //
 //
 
-/*
-
-
-
-
-
-
-  */
 class TropicalVoid extends Component {
   componentDidMount() {
     this.sceneSetup();
@@ -1774,11 +1725,7 @@ class TropicalVoid extends Component {
     // beginning you will find a copy of the code inside the threejs that I am using.
     this.controls.dispose();
   }
-  /*
 
-
-
-  */
   // 1
   sceneSetup = () => {
     //
@@ -1800,10 +1747,7 @@ class TropicalVoid extends Component {
     // background color scene
     // this.lemonChiffon = "rgb(240, 224, 190)";
     //
-    //
-    //
 
-    //
     //                WIDTH/HEIGHT
     // --------------------------------------------
     //
@@ -1868,13 +1812,6 @@ class TropicalVoid extends Component {
     //
     //
     //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
 
     this.eleModelBlOne.addEventListener("click", () => {
       this.controls.lock();
@@ -1892,10 +1829,6 @@ class TropicalVoid extends Component {
       this.eleModelBlOne.style.display = "block";
       this.eleModelBlOne.style.target = "_blank";
     });
-
-    //
-    //
-
     //-------------------------------
     //             KEYS
     //-------------------------------
@@ -1970,18 +1903,6 @@ class TropicalVoid extends Component {
     //
   };
 
-  /*
-
-
-
-
-
-
-
-
-
-
-  */
   // 2
   addCustomSceneObjects = () => {
     //
@@ -2092,14 +2013,6 @@ class TropicalVoid extends Component {
       this.scene.add(box);
       this.objects.push(box);
     }
-    //
-    //
-    //
-    //
-    //
-    //----------------------------------
-    //         BLENDER  MODELS
-    //----------------------------------
     //
 
     //---------------------
