@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import * as THREE from "three";
-import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
+import React, { Component } from 'react';
+import * as THREE from 'three';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 //
 //
 const style = {
@@ -29,12 +29,12 @@ class TropicalVoid extends Component {
     this.addCustomSceneObjects();
     this.startAnimationLoop();
     //
-    window.addEventListener("resize", this.handleWindowResize);
+    window.addEventListener('resize', this.handleWindowResize);
   }
   //
   //
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowResize);
+    window.removeEventListener('resize', this.handleWindowResize);
     window.cancelAnimationFrame(this.requestID);
     // right now with the first person control,
     // we dont need this dispose as it s already included inside the three folder, check the read me, in the
@@ -140,6 +140,7 @@ class TropicalVoid extends Component {
     //
     //
     //
+<<<<<<< HEAD
     //
     //
 
@@ -147,17 +148,39 @@ class TropicalVoid extends Component {
       this.controls.lock();
 
       console.log("I clicked");
+=======
+    // If i change this to a function () {} it will give me an error
+    // vasilis say:
+    // this.eleModelBlOne.addEventListener("click", () => {
+    //   this.controls.lock();
+    // });
+    this.eleModelBlOne.addEventListener('click', () => {
+      this.controls.lock();
+      // it gives you access to raw mouse movement.LOCKS
+      // the target of the mouse events to a single element ,
+      // eliminates limits on how far mouse movement can go in a single direction,
+      // and removes the cursor from view. Good for 1 person 3d games
+      // ***
+      // So when you are actually moving the mouse across the screen (without displacing,)
+      // the pointer has been LOCK to the canvas
+      console.log('I clicked');
+>>>>>>> 54fde36ea8ba038e7b6f8e50ee94d9b474295300
     });
     //
 
-    this.controls.addEventListener("lock", () => {
-      this.eleModelBlOne.style.display = "none";
+    this.controls.addEventListener('lock', () => {
+      this.eleModelBlOne.style.display = 'none';
     });
     //
 
+<<<<<<< HEAD
     this.controls.addEventListener("unlock", () => {
       this.eleModelBlOne.style.display = "block";
       this.eleModelBlOne.style.target = "_blank";
+=======
+    this.controls.addEventListener('unlock', () => {
+      this.eleModelBlOne.style.display = 'block';
+>>>>>>> 54fde36ea8ba038e7b6f8e50ee94d9b474295300
     });
 
     //
@@ -166,10 +189,22 @@ class TropicalVoid extends Component {
     //-------------------------------
     //             KEYS
     //-------------------------------
+<<<<<<< HEAD
     const onKeyDown = (event) => {
       switch (event.code) {
         case "ArrowUp":
         case "KeyW":
+=======
+    //
+    //
+    this.scene.add(this.controls.getObject());
+
+    //I MADE THESE ARROW FUNCTIONS AND THEY CAN USE this. now
+    var onKeyDown = (event) => {
+      switch (event.keyCode) {
+        case 38: // up
+        case 87: // w
+>>>>>>> 54fde36ea8ba038e7b6f8e50ee94d9b474295300
           this.moveForward = true;
           break;
 
@@ -194,10 +229,18 @@ class TropicalVoid extends Component {
           break;
       }
     };
+<<<<<<< HEAD
     const onKeyUp = (event) => {
       switch (event.code) {
         case "ArrowUp":
         case "KeyW":
+=======
+
+    var onKeyUp = (event) => {
+      switch (event.keyCode) {
+        case 38: // up
+        case 87: // w
+>>>>>>> 54fde36ea8ba038e7b6f8e50ee94d9b474295300
           this.moveForward = false;
           break;
 
@@ -217,6 +260,11 @@ class TropicalVoid extends Component {
           break;
       }
     };
+<<<<<<< HEAD
+=======
+    document.addEventListener('keydown', onKeyDown, false);
+    document.addEventListener('keyup', onKeyUp, false);
+>>>>>>> 54fde36ea8ba038e7b6f8e50ee94d9b474295300
 
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("keyup", onKeyUp);
@@ -286,16 +334,12 @@ class TropicalVoid extends Component {
     // what makes the triangles of the floor have different colors
     for (let i = 0, l = position.count; i < l; i++) {
       // here you are generating random colors HSL
-      this.color.setHSL(
-        Math.random() * 0.3 + 0.5,
-        0.75,
-        Math.random() * 0.25 + 0.75
-      );
+      this.color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
       colorsFloor.push(this.color.r, this.color.g, this.color.b);
     }
     //
     this.floorGeometry.setAttribute(
-      "color",
+      'color',
       new THREE.Float32BufferAttribute(colorsFloor, 3)
     );
     //
@@ -321,16 +365,12 @@ class TropicalVoid extends Component {
     const colorsBox = [];
     //
     for (let i = 0, l = position.count; i < l; i++) {
-      this.color.setHSL(
-        Math.random() * 0.3 + 0.5,
-        0.75,
-        Math.random() * 0.25 + 0.75
-      );
+      this.color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
       colorsBox.push(this.color.r, this.color.g, this.color.b);
     }
     //
     this.boxGeometry.setAttribute(
-      "color",
+      'color',
       new THREE.Float32BufferAttribute(colorsBox, 3)
     );
     //
@@ -433,8 +473,19 @@ class TropicalVoid extends Component {
     this.time = performance.now();
     //// Are the controls enabled? (Does the browser have pointer lock?)
     if (this.controls.isLocked === true) {
+<<<<<<< HEAD
       //
       raycaster.ray.origin.copy(this.controls.getObject().position);
+=======
+      // LETS SEE IF IT UPDATES PROPERLY
+      console.log(`FORWARD`, this.moveForward);
+      console.log(`BACKWARDS`, this.moveBackward);
+      console.log(`LEFT`, this.moveLeft);
+      console.log(`RIGHT`, this.moveRight);
+      console.log(`--------------------------------`);
+
+      this.raycaster.ray.origin.copy(this.controls.getObject().position);
+>>>>>>> 54fde36ea8ba038e7b6f8e50ee94d9b474295300
       // A ray that emits from an origin in a certain direction.
       raycaster.ray.origin.y -= 10;
 
@@ -451,6 +502,7 @@ class TropicalVoid extends Component {
       this.velocity.z -= this.velocity.z * 10.0 * this.delta;
       // As velocity.y is our "gravity," calculate delta
       this.velocity.y -= 9.8 * 100.0 * this.delta; // 100.0 = mass
+<<<<<<< HEAD
       //
 
       //
@@ -483,6 +535,41 @@ class TropicalVoid extends Component {
       // }
       // ---------------------------------------
 
+=======
+
+      // WE WERE MISSING THESE GUYS FROM THE EXAMPLE
+      this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
+      this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
+      this.direction.normalize(); // this ensures consistent movements in all directions
+
+      // how to move i guess when you click
+      if (this.moveForward || this.moveBackward)
+        this.velocity.z -= this.direction.z * 400.0 * this.delta;
+      if (this.moveLeft || this.moveRight)
+        this.velocity.x -= this.direction.x * 400.0 * this.delta;
+      //
+      // //              *****
+      // //              new
+      // if (this.moveForward) {
+      //   console.log(`I am moving forward`);
+      //   this.velocity.z -= 400.0 * this.delta;
+      // }
+
+      // if (this.moveBackward) {
+      //   console.log(`I am moving backwards`);
+      //   this.velocity.z += 400.0 * this.delta;
+      // }
+
+      // if (this.moveLeft) {
+      //   console.log(`I am moving left`);
+      //   this.velocity.x -= 400.0 * this.delta;
+      // }
+
+      // if (this.moveRight) {
+      //   console.log(`I am moving right`);
+      //   this.velocity.x += 400.0 * this.delta;
+      // }
+>>>>>>> 54fde36ea8ba038e7b6f8e50ee94d9b474295300
       //
       //              *****
       //
@@ -539,6 +626,7 @@ class TropicalVoid extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="scene-oblivion">
         {/* --------------------- */}
         <div className="blocker" ref={(ref) => (this.blocker = ref)}>
@@ -558,6 +646,31 @@ class TropicalVoid extends Component {
           Jump: SPACE
           <br />
           Look: MOUSE
+=======
+      <div className='scene-oblivion'>
+        <div className='blocker' ref={(ref) => (this.blocker = ref)}>
+          {/* --------------------- */}
+          {/* --------------------- */}
+          {/* --------------------- */}
+          <div
+            className='modelBleOne'
+            style={style}
+            ref={(ref) => (this.eleModelBlOne = ref)}
+          >
+            <div className='commands'>
+              <span>Click to play</span>
+              <br />
+              <br />
+              Move: WASD
+              <br />
+              Jump: SPACE
+              <br />
+              Look: MOUSE
+            </div>
+          </div>
+          {/* --------------------- */}
+          {/* --------------------- */}
+>>>>>>> 54fde36ea8ba038e7b6f8e50ee94d9b474295300
         </div>
         {/* --------------------- */}
         {/* --------------------- */}
